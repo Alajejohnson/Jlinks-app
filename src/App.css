@@ -1,39 +1,154 @@
-.App {
+*{
+  margin: 0;
+  padding: 0;
+}
+.app {
   text-align: center;
+  /* background: var(--background); */
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root{
+  --background: radial-gradient(circle at 0% 100%, rgba(0, 123, 255, 1) 0%, rgba(238, 130, 238, 1) 62%, rgba(225, 127, 80, 1) 100%);
+  --bg2: linear-gradient(180deg, rgba(0, 123, 255, 1) 0%, rgba(238, 130, 238, 1) 70%, rgba(255, 127, 80, 1) 100%);
+  --sp: 2rem 4rem ;
+  --spmob: 1rem 2rem;
+  --mont: "Montserrat", sans-serif;
+  --merri: "Merriweather", serif;
+  --coral: rgba(255, 127, 80, 1);
+  --blue: rgba(0, 123, 255, 1);
+  --lightblue: rgba(0, 123, 255, 1) 15%;
+  --ash: rgba(135, 130, 130, 1);
+  --light-ash: rgba(217, 217, 217, 1);
+}
+.active{
+  background-color: var(--light-ash);
+  border-radius: 8px;
+  padding: 8px;
+  color: var(--blue);
+
+}
+.appbg{
+    background-color: var(--light-ash);
+}
+.mont{
+  font-family: var(--mont)
+}
+.merri{
+  font-family: var(--merri)
+}
+.about .right img{
+  display: inline;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
+.auto{
+  margin: auto;
+}
+.linear{
+  background: var(--bg2);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+/* ---------animation--------- */
+.heartbeat {
+	-webkit-animation: heartbeat 1.5s ease-in-out infinite both;
+	        animation: heartbeat 1.5s ease-in-out infinite both;
+}
+@keyframes heartbeat {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-transform-origin: center center;
+            transform-origin: center center;
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  10% {
+    -webkit-transform: scale(0.91);
+            transform: scale(0.91);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  17% {
+    -webkit-transform: scale(0.98);
+            transform: scale(0.98);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  33% {
+    -webkit-transform: scale(0.87);
+            transform: scale(0.87);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  45% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
   }
 }
 
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-}
 
-.App-link {
-  color: rgb(112, 76, 182);
+.scale-in-hor-right {
+	-webkit-animation: scale-in-hor-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: scale-in-hor-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
-
-@keyframes App-logo-float {
+@keyframes scale-in-hor-right {
   0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+    -webkit-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
+    opacity: 1;
   }
   100% {
-    transform: translateY(0px);
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+    -webkit-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
+    opacity: 1;
   }
 }
+
+.text-pop-up-br {
+	-webkit-animation: text-pop-up-br 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: text-pop-up-br 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+@keyframes text-pop-up-br {
+  0% {
+    -webkit-transform: translateY(0) translateX(0);
+            transform: translateY(0) translateX(0);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    text-shadow: none;
+  }
+  100% {
+            transform: translateY(3px) translateX(10px);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 20% 20%;
+    text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc, 0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc, 0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.shadow-drop-2-center {
+	-webkit-animation: shadow-drop-2-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: shadow-drop-2-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+@keyframes shadow-drop-2-center {
+  0% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translateZ(50px);
+            transform: translateZ(50px);
+    -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+  }
+}
+

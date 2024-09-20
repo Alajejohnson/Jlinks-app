@@ -1,0 +1,8 @@
+export {default as Header } from './header/Header'
+export {default as Hero} from './hero/Hero'
+export {default as About} from './about/About'
+export {default as Footer} from './footer/Footer'
+export {default as Navbar} from './navbar/Navbar'
+export {default as ProfileDetails} from './profile-details/profileDetails'
+export {default as Profile} from './profile/Profile'
+export {default as Link} from './link/Link'

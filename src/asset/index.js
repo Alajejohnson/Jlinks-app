@@ -1,0 +1,6 @@
+export {default as Logo} from '../asset/jlinks2 logo.png'
+export {default as LogoName} from '../asset/Group 13.png'
+export {default as Hamburger} from '../asset/icon-hamburger.svg'
+export {default as Close} from '../asset/icon-close.svg'
+export {default as Hero_img} from '../asset/Ellipse 1.png'
+export {default as About_img} from '../asset/about_img.png'
