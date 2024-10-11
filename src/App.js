@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './container/home/Home';
@@ -13,6 +13,8 @@ function App({userId}) {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
+  
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
       if (userAuth) {
@@ -23,6 +25,12 @@ function App({userId}) {
     });
     return unsubscribe;
   }, [auth, dispatch]);
+
+  const [links, setLinks] = useState([]);
+  
+  const handleAddLink = (newLink) => {
+    setLinks([...links, newLink]);
+  };
 
 
   return (
@@ -38,8 +46,8 @@ function App({userId}) {
             <Route path="/" element={<Layout />}>
               
                 <Route index element={<ProfileDetails userId={userId} />}   />
-                <Route path='/link' element={<Link userId={userId} /> } />
-                <Route path='/profile/:userId' element={<Profile userId={userId} /> }  />
+                <Route path='/link' element={<Link userId={userId} onAddLink={handleAddLink}  /> } />
+                <Route path='/profile/:userId' element={<Profile userId={userId}  links={links} /> }  />
               </Route>
 
                          

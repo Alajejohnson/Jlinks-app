@@ -37,7 +37,10 @@ const SignUp = ({onClose}) => {
                 navigate(`/profile/${userAuth.user.uid}`);
             });
         })
-        .catch((error) => alert(error.message));
+        .catch((error) => {
+            console.log(error);
+            alert(error.message);
+          });
     };
 
   return (

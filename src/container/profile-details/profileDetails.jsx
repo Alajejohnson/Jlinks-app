@@ -236,6 +236,8 @@ const ProfileDetails = () => {
         <PhotoSizeSelectActualIcon />
       </div>
     )} 
+
+
   </div>
                   </div>
                
