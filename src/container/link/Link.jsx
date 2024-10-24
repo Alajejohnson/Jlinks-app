@@ -1,5 +1,4 @@
 import React from 'react'
-import links from '../../component/links/links'
 import { useState } from 'react'
 import { db } from '../../firebase'; // Assuming Firebase setup is done in this file
 import { collection, addDoc } from 'firebase/firestore'; 
