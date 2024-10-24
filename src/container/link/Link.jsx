@@ -63,29 +63,47 @@ const Link = ({ onAddLink }) => {
       // }
 
       try {
-        await Promise.all(links.map(async (link) => {
-          if (link.link !== '' && link.platform) {
-            // Save to Firebase: platform and link
-            return await addDoc(collection(db, 'userLinks'), {
-              platform: link.platform,
-              link: link.link,
-              userId: userId,  // Ensure you are passing the correct userId
-              createdAt: new Date(),  // Or use Firestore's server timestamp if needed
-            });
-          }
-        }));
-        alert('Links saved successfully!');
-      } catch (error) {
-        console.error('Error saving links: ', error);
-        alert('Error saving links');
+      //   await Promise.all(links.map(async (link) => {
+      //     if (link.link !== '' && link.platform) {
+      //       // Save to Firebase: platform and link
+      //       return await addDoc(collection(db, 'userLinks'), {
+      //         platform: link.platform,
+      //         link: link.link,
+      //         userId: userId,  // Ensure you are passing the correct userId
+      //         createdAt: new Date(),  // Or use Firestore's server timestamp if needed
+      //       });
+      //     }
+      //   }));
+      //   alert('Links saved successfully!');
+      // } catch (error) {
+      //   console.error('Error saving links: ', error);
+      //   alert('Error saving links');
+      // }
+
+          // Loop through all the links and save each under the user's subcollection
+    await Promise.all(links.map(async (link) => {
+      if (link.link !== '' && link.platform !== '') {
+        // Save to Firestore under the user's subcollection: users/{userId}/links
+        await addDoc(collection(db, 'users', userId, 'links'), {
+          platform: link.platform,
+          link: link.link,
+          createdAt: new Date(),
+        });
       }
+    }));
+
+    alert('Links saved successfully!');
+  } catch (error) {
+    console.error('Error saving links:', error);
+    alert('Error saving links');
+  }
     };
 
   return (
     <div className="link   appbg p-[var(--spmob)] md:p-[var(--sp)] ">
         <div className='bg-white rounded-lg py-4 px-3 text-start flex flex-col gap-5  '>
             <div>
-                <h2 className='mont text-lg md:text-xl font-semibold  ' >Customize your links </h2>
+                <h2 className='mont text-lg md:tex~t-xl font-semibold  ' >Customize your links </h2>
                 <p className='merri text-sm md:text-base my-3  ' >Add/edit/remove links below and then share all your profiles with the world!</p>
 
                 <button className=' border-[1px] border-[var(--blue)] rounded-lg text-base md:text-lg mont font-medium mt-4 px-4 py-2 w-full text-[var(--blue)] hover:bg-[var(--blue)] hover:text-white ' onClick={handleAddLink} >+ Add new link </button>
@@ -144,15 +162,24 @@ const Link = ({ onAddLink }) => {
           <div >
           <h5 className='mt-2 text-base mont  ' >Platform</h5>
           <select value={item.platform} onChange={(e) => handlePlatformChange(index, e.target.value)}  className='mt-2 p-2 rounded-md border-[1px] border-[var(--ash)] mont font-medium outline-none w-full  '>
-            <option className='w-full text-base ' value="GitHub">GitHub</option>
-            <option className='w-full text-base ' value="YouTube">YouTube</option>
-            <option className='w-full text-base ' value="LinkedIn">LinkedIn</option>
+            <option className='w-full text-[12px] ' value="GitHub">GitHub</option>
+            <option className='w-full text-[12px] ' value="LinkedIn">LinkedIn</option>
+            <option className='w-full text-[12px] ' value="YouTube">YouTube</option>
+            <option className='w-full text-[12px] ' value="TikTok ">TikTok </option>
+            <option className='w-full text-[12px] ' value="Instagram ">Instagram </option>
+            <option className='w-full text-[12px] ' value="Facebook ">Facebook </option>
+            <option className='w-full text-[12px] ' value="X ">X </option>
+            <option className='w-full text-[12px] ' value="Telegram ">Telegram </option>
+            <option className='w-full text-[12px] ' value="WhatsApp ">WhatsApp </option>
+            <option className='w-full text-[12px] ' value="Snapchat ">Snapchat </option>
+            <option className='w-full text-[12px] ' value="Pinterest ">Pinterest </option>
+            
           </select>
           </div>
           
 
           <h5  className='mt-2 text-base mont  ' >Link</h5>
-          <Icon icon="solar:link-line-duotone" />
+          <Icon icon="solar:link-line-duotone" className='absolute  ' />
           <input
             type="text"
             value={item.link}

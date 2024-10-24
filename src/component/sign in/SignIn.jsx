@@ -42,19 +42,19 @@ const SignIn = ({onClose}) => {
         <img src={LogoName} alt="" className='max-w-16  ' />
         </div>
 
-        <form className='flex flex-col item-start gap-3 mt-4 ' > 
-        <div className='flex flex-col'>
+        <form className='flex flex-col item-start gap-3 mt-4 md:gap-6  ' > 
+        <div className='flex flex-col md:flex-row md:gap-[3rem] '>
                         <label className='text-black mont font-medium text-sm md:text-base'  >Email :</label>
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Enter your email' className=' bg-white border-[1px] border-[var(--blue)] rounded-lg py-1 px-2 mt-2  text-black ' />
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Enter your email' className=' bg-white border-[1px] border-[var(--blue)] rounded-lg py-1 px-2 mt-2  md:mt-0 text-black ' />
                     </div>
 
-            <div className='flex flex-col'>
+            <div className='flex flex-col  md:flex-row md:gap-4'>
                 <label className='text-black mont font-medium text-sm md:text-base '  >Password :</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Enter your password' className=' bg-white border-[1px] border-[var(--blue)] rounded-lg py-1 px-2 mt-2   text-black ' />
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Enter your password' className=' bg-white border-[1px] border-[var(--blue)] rounded-lg py-1 px-2 mt-2   text-black md:mt-0 ' />
             </div>
 
             <div className='mt-2 flex flex-col items-center '>
-                <button type='submit' className='rounded-2xl text-white bg-[var(--blue)] mont text-base font-semibold py-2 px-4 shadow-md mt-6  ' onClick={LoginToApp} >Login</button>
+                <button type='submit' className='rounded-2xl text-white bg-[var(--blue)] mont text-base font-semibold py-2 px-4 shadow-md mt-6 md:mt-3  ' onClick={LoginToApp} >Login</button>
 
                 <h5 className=' text-black mont text-xs my-2  ' >Don't have an account? <span className='cursor-pointer font-semibold' onClick={() => handleSignUpClick(setShowSignUp, setShowSignIn)}  >Sign Up</span></h5>
             </div>

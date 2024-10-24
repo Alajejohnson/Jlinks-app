@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import { getDoc, getDocs, doc, collection } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { auth } from '../../firebase';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Profile = ({links}) => {
@@ -106,7 +107,10 @@ const Profile = ({links}) => {
     <div className="profile p-[var(--spmob)] md:p-[var(--sp)]   ">
 
         <div className=' flex justify-between items-center  '>
-            <button className='text-[var(--blue)] bg-white border-[1px] border-[var(--blue)] mont rounded-lg py-2 px-4 text-base   '  >Back to Editor </button>
+        <NavLink to="/link ">
+ <button className='text-[var(--blue)] bg-white border-[1px] border-[var(--blue)] mont rounded-lg py-2 px-4 text-base   '  >Back to Editor </button>
+        </NavLink>
+           
             <button className='text-white bg-[var(--blue)]  mont rounded-lg py-2 px-4 text-base   ' >Share Link  </button>
         </div>
 
@@ -147,7 +151,7 @@ const Profile = ({links}) => {
         <div className="link-display mt-8  ">
           <div className="link-list flex flex-col gap-3  ">
             {userLinks.map((link, index) => (
-              <div key={index} className="link-item bg-[var(--blue)] rounded-md text-white px-6 py-6">
+              <div key={index} className="link-item bg-[var(--blue)] rounded-md text-white  p-3 mont text-base md:text-lg   ">
                 <a href={link.link} target="_blank" rel="noopener noreferrer">
                   {link.platform}
                 </a>
