@@ -4,6 +4,7 @@ import { db } from '../../firebase'; // Assuming Firebase setup is done in this 
 import { collection, addDoc } from 'firebase/firestore'; 
 import { auth } from '../../firebase';
 import { Icon } from '@iconify/react/dist/iconify.js';
+import { useEffect } from 'react';
 
 
 const Link = ({ onAddLink }) => {
@@ -12,6 +13,9 @@ const Link = ({ onAddLink }) => {
     const [links, setLinks] = useState([
       { platform: 'GitHub', link: '' }
     ]);
+
+    const [userLinks, setUserLinks] = useState([]);
+    console.log(userLinks); 
 
     const user = auth.currentUser;
     const userId = user ? user.uid : null;
@@ -89,7 +93,7 @@ const Link = ({ onAddLink }) => {
           createdAt: new Date(),
         });
       }
-    }));
+    }),{ merge: true });
 
     alert('Links saved successfully!');
   } catch (error) {
@@ -97,6 +101,22 @@ const Link = ({ onAddLink }) => {
     alert('Error saving links');
   }
     };
+
+            // Fetch the user's links from Firebase
+  useEffect(() => {
+    const fetchLinks = async () => {
+      try {
+        const linksCollection = collection(db, 'users', userId, 'links');
+        const linkSnapshot = await getDocs(linksCollection);
+        const linksList = linkSnapshot.docs.map((doc) => doc.data());
+        setUserLinks(linksList);
+      } catch (error) {
+        console.error('Error fetching user links: ', error);
+      }
+    };
+
+    fetchLinks();
+  }, [userId]);
 
   return (
     <div className="link   appbg p-[var(--spmob)] md:p-[var(--sp)] ">
@@ -176,9 +196,11 @@ const Link = ({ onAddLink }) => {
           </select>
           </div>
           
-
-          <h5  className='mt-2 text-base mont  ' >Link</h5>
-          <Icon icon="solar:link-line-duotone" className='absolute  ' />
+        <div className="flex gap-1 mt-2  ">
+        <Icon icon="solar:link-line-duotone" className=' ' />
+        <h5  className='text-base mont  ' >Link</h5>
+        </div>
+          
           <input
             type="text"
             value={item.link}

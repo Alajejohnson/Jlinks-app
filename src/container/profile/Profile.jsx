@@ -9,10 +9,13 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Profile = ({links}) => {
     const [profile, setProfile] = useState(null);
+    const [shareLink, setShareLink] = useState('');
+    const [linkCopied, setLinkCopied] = useState(false);
     // const {userId} = useParams();
     const user = auth.currentUser;
     const userId = user ? user.uid : null;
 
+    const navigate = useNavigate();
 
     const [userLinks, setUserLinks] = useState([]);
     console.log(userLinks);  // Debugging step to check the data
@@ -68,11 +71,10 @@ const Profile = ({links}) => {
           }
     
           // Fetch links
-          const linksCollection = collection(db, 'userLinks', userId, 'links');
+          const linksCollection = collection(db, 'users', userId, 'links');
           const linkSnapshot = await getDocs(linksCollection);
           const linksList = linkSnapshot.docs.map((doc) => doc.data());
           setUserLinks(linksList);
-    
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -103,6 +105,25 @@ const Profile = ({links}) => {
   // }, [userId]);
     
 
+
+   // Function to generate the shareable link
+   const generateShareLink = () => {
+    if (!userId) {
+      console.error('No user ID found.');
+      return;
+    }
+    // Replace with your app's URL and profile route
+    const profileUrl = `${window.location.origin}/profile/${userId}`;
+    setShareLink(profileUrl);
+    setLinkCopied(false); // Reset the copied state
+  };
+
+  // Function to copy the link to the clipboard
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(shareLink);
+    setLinkCopied(true); // Update state to show success message
+  };
+
   return (
     <div className="profile p-[var(--spmob)] md:p-[var(--sp)]   ">
 
@@ -111,7 +132,36 @@ const Profile = ({links}) => {
  <button className='text-[var(--blue)] bg-white border-[1px] border-[var(--blue)] mont rounded-lg py-2 px-4 text-base   '  >Back to Editor </button>
         </NavLink>
            
-            <button className='text-white bg-[var(--blue)]  mont rounded-lg py-2 px-4 text-base   ' >Share Link  </button>
+            <button className='text-white bg-[var(--blue)]  mont rounded-lg py-2 px-4 text-base   ' onClick={generateShareLink}  >Share Link  </button>
+
+        </div>
+
+        <div>
+          {/* If shareLink exists, display the input box with the shareable link */}
+    {shareLink && (
+        <div className="share-link mt-4 flex items-center">
+          <input 
+            type="text"
+            value={shareLink}
+            readOnly
+            className="share-input border-2 border-gray-300 p-2 rounded-md w-full"
+          />
+          <button 
+            className="copy-btn bg-[var(--blue)] text-white rounded-lg px-4 py-2 ml-2"
+            onClick={copyToClipboard}
+          >
+            Copy
+          </button>
+        </div>
+      )}
+
+      {/* Display success message when the link is copied */}
+      {linkCopied && (
+        <p className="text-green-500 mt-2">Link copied to clipboard!</p>
+      )}
+
+      {/* Your existing profile rendering logic here */}
+      {/* Display user profile image, name, and links */}
         </div>
 
         <div className='flex flex-col justify-center items-center mt-12 '>

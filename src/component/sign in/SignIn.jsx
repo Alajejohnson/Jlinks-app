@@ -33,7 +33,7 @@ const SignIn = ({onClose}) => {
     };
 
   return (
-    <div className="signIn shadow-drop-2-center text-start  absolute top-1/4 z-10 bg-[var(--lightblue)]   flex flex-col items-center justify-center auto  md:left-1/4 lg:left-[32%]   ">
+    <div className="signIn shadow-drop-2-center text-start  absolute top-1/4 z-10 bg-[var(--lightblue)]   flex flex-col items-center justify-center auto  left-[13%]  md:left-1/4 lg:left-[32%]   ">
 
 
     <div className='bg-white rounded-lg w-fit  flex flex-col items-center justify-center px-12 py-6 '>
