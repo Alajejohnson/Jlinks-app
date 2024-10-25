@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { db } from '../../firebase'; // Assuming Firebase setup is done in this file
-import { collection, addDoc } from 'firebase/firestore'; 
+import { collection, addDoc, getDoc, getDocs } from 'firebase/firestore'; 
 import { auth } from '../../firebase';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { useEffect } from 'react';
